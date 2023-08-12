@@ -4,37 +4,118 @@
   <meta charset="utf-8">
   <title>index</title>
   <base target="_blank">
+  <style>
+  body {    /* 以下分别是背景颜色/内容溢出-滚动/外边距上下左右/内边距上下左右/布局-容器/容器内布局-中央对齐/容器内布局-位于开头/屏幕内容-可见高度100%/文本-水平居中 */
+    background-color: #e0f2f1;
+    overflow: scroll;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    text-align: center;
+  }  
+  
+    .snowflake {
+      position: absolute;
+      color: white;
+      font-size: 25px;
+      animation: snowfall linear infinite;
+    }
+
+    @keyframes snowfall {
+      0% {
+        transform: translateY(-100px);
+      }
+      100% {
+        transform: translateY(100vh);
+      }
+    }
+  
+  #container {
+      text-align: left;
+  }
+  
+  #title {
+      font-size: 16px; <!--字体大小-->
+      font-weight: normal; <!--字体粗细:正常-->
+  }
+  
+  #table {
+      margin-top: 20px;
+      display: inline-block;
+      text-align: left;
+      width: auto;
+      margin: 0 auto;
+      border: 1px solid #A4A4A4;
+      border-collapse: collapse;  
+  }
+  
+  #table td {
+      padding: 5px; <!--内边距-->
+	  height: 35px;
+      border: 1px solid #A4A4A4;
+      text-align: center;
+  }
+  #table td a {
+      color: #2196F3;
+  }
+  
+  #table td:not(a) {
+      color: #000000;
+        }
+  
+  #footer {
+      margin-top: 0px;
+      font-size: 16px;
+      text-align: left;
+  }
+  </style>
 </head>
 <body>
-<style>
-    table {
-        width: 850px;
-        margin: 0 auto;
-        border: 1px solid #A4A4A4;
-        border-collapse: collapse;
+  <script>
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.innerHTML = '❉';
+      snowflake.className = 'snowflake';
+      
+      const randomX = Math.random() * window.innerWidth;
+      const randomDelay = Math.random() * 5;
+      const randomDuration = Math.random() * 5 + 5;
+
+      snowflake.style.left = randomX + 'px';
+      snowflake.style.top = '-50px'; // 在网页外生成
+      snowflake.style.animationDelay = randomDelay + 's';
+      snowflake.style.animationDuration = randomDuration + 's';
+
+      document.body.appendChild(snowflake);
+
+      setTimeout(function() {
+        snowflake.remove(); // 雪花下落到底部后移除
+      }, (randomDuration + randomDelay) * 1000);
     }
-    td {
-        height: 35px;
-		border: 1px solid #A4A4A4;
-        text-align: center;
-    }
-    td a {
-        color: #2196F3;
-    }
-    td:not(a) {
-        color: #000000;
-          }
-</style>
-<table>
-<thead>
-  <tr>
-    <td colspan="5" rowspan="1" style="text-align: left;"> <!--colspan="5"合并第一行的五列，rowspan="5"合并第一列的五行-->
-      {\__/}<br>
-      ( •̀∀•́)<br>
-      / ⊃/ ⊃ <font color="#ff0000">小兔子</font>
-    </td>
-  </tr>
-</thead>
+
+    setInterval(createSnowflake, 2000); // 每2秒创建一个新的❉
+  </script>
+<div id="container">
+<div id="title">
+	{\__/}<br>
+	  ( •̀∀•́)<br>
+	  / ⊃/ ⊃<a style="color: #ff0000;white-space: pre;">小兔子               </a>
+	     <a href="#" id="hitokoto_text" style="color: #2196F3;"></a>
+	<script>  <!--一言-->
+	    fetch('https://v1.hitokoto.cn/??c=d&c=i ')
+	        .then(response => response.json())
+	        .then(data => {
+	            const hitokoto = document.querySelector('#hitokoto_text')
+	            hitokoto.href = `https://hitokoto.cn/?uuid=${data.uuid}`
+	            hitokoto.innerText = `一言:${data.hitokoto}`
+	        })
+	        .catch(console.error)
+	</script>
+</div>
+<table id="table">
 <td align="center"><strong>部分网络教育院校统一入口</strong></td>
 <td align="center"><strong><a href="https://www.beiwaionline.com/">北京外国语大学</a></strong></td>
 <td align="center"><strong><a href="https://www.strongsee.com/bjwgydx/">北外在线考试监控</a></strong></td>
@@ -252,16 +333,11 @@
 <td align="center"></td>
 </tr>
 </tbody>
- <tr>
-    <th colspan="5">
-      <div style="display: flex; justify-content: left;">
-        <div style="text-align: left;">
+</table>
+<div id="footer">
 <p><img src="https://s1.ax1x.com/2023/03/24/pp0XhQg.png" alt="" title="https://www.beian.gov.cn/apply/staticWebInfo"><a href="https://www.beian.gov.cn/apply/staticWebInfo"><font color="#2196F3">赣公网安备36011102000828号</font></a>|<a 
 href="https://beian.miit.gov.cn/"><font color="#2196F3">赣ICP备2023001426号-1</font></a></p>
-        </div>
-      </div>
-    </th>
-  </tr>
-</table>
+</div>
+</div>
 </body>
 </html>

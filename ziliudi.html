@@ -1,41 +1,100 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">   <!-- 网页使用UTF-8通用字符 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 如何适应不同设备的屏幕大小，根据设备的屏幕宽度自动调整，指定了网页的初始缩放比例为 1.0不缩放 -->
-    <base target="_blank">
-	<style> /* 使用 CSS 实现整体布局 */
-        .container {
-            display: flex; /* 使用 Flexbox 布局 */
-            align-items: flex-start; /* 将项目与容器顶部对齐 */
-            justify-content: center; /* 使内容水平居中 */
-            max-width: 1300px; /* 最大宽度为 1200px */
-            margin: 0 auto; /* 在页面中水平居中 */
-        }
-        .text {
-            text-align: left; /* 文字居左显示 */
-            max-width: 60%; /* 文字最大宽度为容器宽度的 60% */
-        }
-        .image {
-            margin-left: 20px; /* 图片与文字之间的间距 */
-		}
-        .image img {
-            max-width: 80%; /* 图片宽度最大为父元素宽度 */
-            height: auto; /* 保持宽高比 */
-        }
-        .description {
-            margin-top: 10px; /* 图片介绍与图片之间的间距 */
-            color: #808080;
-		}
-		#footer {
-		    margin-top: 40px;
-		    font-size: 12px;
-		    text-align: center;
-		}
-    </style>
-    <style>/* 使用 CSS 实现网址导航内容布局 */
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>自留地·后花园</title>
+   <style>
+      /* 设置body的边距为0，以去除默认的边距 */
+      body {margin: 0;}
+      
+      /* 定义侧边导航栏ul的样式 */
+      ul.sidenav {
+          /* 移除列表项前的符号 */
+          list-style-type: none;
+          /* 移除默认的外边距和内边距 */
+          margin: 0;
+          padding: 0;
+          /* 设置侧边导航栏的宽度 */
+          width: 25%;
+          /* 设置背景颜色 */
+          background-color: #f1f1f1;
+          /* 固定定位侧边导航栏 */
+          position: fixed;
+          /* 设置侧边导航栏的高度，占满整个视口 */
+          height: 100%;
+          /* 允许内容在超出时出现滚动条 */
+          overflow: auto;
+      }
+      
+      /* 定义侧边导航栏中li元素下a标签的样式 */
+      ul.sidenav li a {
+          /* 将链接显示为块级元素 */
+          display: block;
+          /* 设置链接文字颜色 */
+          color: #000;
+          /* 设置内边距，增加点击区域 */
+          padding: 8px 16px;
+          /* 移除链接下划线 */
+          text-decoration: none;
+      }
+       
+      /* 为激活状态（即当前选中）的链接设置样式 */
+      ul.sidenav li a.active {
+          /* 设置背景颜色 */
+          background-color: #4CAF50;
+          /* 设置文字颜色为白色 */
+          color: white;
+      }
+      
+      /* 为非激活状态的链接设置鼠标悬停效果 */
+      ul.sidenav li a:hover:not(.active) {
+          /* 设置背景颜色 */
+          background-color: #555;
+          /* 设置文字颜色为白色 */
+          color: white;
+      }
+      
+      /* 定义主要内容区域div的样式 */
+      div.content {
+          /* 左侧边距与侧边导航栏宽度相同，防止内容被遮挡 */
+          margin-left: 25%;
+          /* 设置内边距，增加内容区域的可读性 */
+          padding: 1px 16px;
+          /* 设置内容区域的高度，示例值为1000px */
+          height: 1000px;
+      }
+      
+      /* 响应式布局：当屏幕宽度小于或等于900px时，调整侧边导航栏和主要内容区域的样式 */
+      @media screen and (max-width: 900px) {
+          ul.sidenav {
+              /* 侧边导航栏宽度变为100%，适应小屏幕 */
+              width: 100%;
+              /* 高度自动调整，适应内容 */
+              height: auto;
+              /* 改变定位方式，使其成为相对定位 */
+              position: relative;
+          }
+          ul.sidenav li a {
+              /* 使链接浮动到左侧，适应小屏幕布局 */
+              float: left;
+              /* 调整内边距，适应小屏幕布局 */
+              padding: 15px;
+          }
+          div.content {margin-left: 0;} /* 移除左侧边距，让内容占据整个屏幕宽度 */
+      }
+      
+      /* 响应式布局：当屏幕宽度小于或等于400px时，进一步调整侧边导航栏中的a标签的样式 */
+      @media screen and (max-width: 400px) {
+          ul.sidenav li a {
+              /* 使链接文本居中显示 */
+              text-align: center;
+              /* 清除浮动 */
+              float: none;
+          }
+      }
+   </style>
+   <style>/* 使用 CSS 实现网址导航内容布局 */
         .title {
-            font-size: 0.8em; /* 更改标题的字体大小（1em=16px） */
 			margin: 25px 0 10px 0; /* 更改标题之间的间距（上右下左） */
 			color: #000000;
             font-weight: bold
@@ -47,138 +106,231 @@
         }
 
         .website-title {
-            font-size: 1em; /* 更改网站标题的字体大小（1em=16px） */
+            target:_blank
+			font-size: 1em; /* 更改网站标题的字体大小（1em=16px） */
             margin: 10px 20px 10px 0; /* 更改标题之间的间距（上右下左） */
 			color: #000000;
             word-wrap: break-word; /* 当标题过长时自动换行 */
         }
-    </style>
+   </style>
+   <style>/* 使用 CSS 实现网页图片旋转 */
+       .rotate {
+           animation: rotation 30s infinite linear; /* 30秒完成一圈，无限循环，线性速度 */
+       }
+    
+       @keyframes rotation {
+           from {
+               transform: rotate(0deg); /* 初始状态为0度 */
+           }
+           to {
+               transform: rotate(-360deg); /* 结束状态为360度 */
+           }
+       }
+   </style>
 </head>
 <body>
-    <div class="container">
-        <div class="text">
-        <h2 class="title">Python学习</h2>
-                    <div class="line"></div>
-                    <div class="website-titles">
-						<a href="https://www.runoob.com/python/python-tutorial.html" class="website-title">菜鸟网络</a>
-                        <a href="https://www.liaoxuefeng.com/wiki/1016959663602400" class="website-title">廖雪峰</a>
-                        <a href="https://www.yuanrenxue.cn/python" class="website-title">猿人学</a>
-						<a href="https://www.pythontab.com/" class="website-title">Pythontab</a>
-						<a href="https://www.lmcjl.com/python" class="website-title">Python教程</a>
-						<a href="https://www.byhy.net/tut/py/basic/01/" class="website-title">Python教程</a>
-						<a href="https://github.com/jackfrued/Python-100-Days" class="website-title">Python - 100天</a>
-                    </div>
-		<h2 class="title">学习资源·效率工具</h2>
-		            <div class="line"></div>
-		            <div class="website-titles">
-						<a href="https://search.chongbuluo.com/" class="website-title">虫部落·快搜</a>
-						<a href="https://metaso.cn/" class="website-title" title="可以免登陆">秘塔AI搜索</a>
-						<a href="https://smartread.cc/ " class="website-title">司马阅</a>
-						<a href="https://kimi.moonshot.cn/ " class="website-title" title="手机号验证登陆">Kimi.ai</a>
-						<br>
-						<a href="http://axutongxue.ysepan.com/" class="website-title">阿虚同学的储物间</a>
-						<a href="http://qzbltushu.ysepan.com/" class="website-title">考研资源</a>
-						<a href="http://xuexinxs.ysepan.com/" class="website-title">薛信的资料室</a>
-						<br>
-						<a href="https://github.com/GrowingGit/GitHub-Chinese-Top-Charts" class="website-title">github中文排行榜</a>
-						<a href="https://www.guidebook.top/" class="website-title">数字生活指南</a>
-						<a href="https://tuostudy.upnb.top/" class="website-title">图欧学习资源导航</a>
-						<a href="https://check.1kbtool.com/" class="website-title">镜像收集</a>
-						<a href="https://sockstack.cn/github" class="website-title">镜像收集2</a>
-						<br>
-						<a href="https://github.com/easychen/one-person-businesses-methodology" class="website-title">一人公司方法论</a>
-		                <a href="https://ziyuanpi.com/" class="website-title" title="mu·1g">资源π</a>
-					</div>	   		
-        <h2 class="title">学习平台</h2>
-                    <div class="line"></div>
-                    <div class="website-titles">
-						<a href="https://www.icourse163.org/" class="website-title">中国大学MOOC</a>
-                        <a href="https://www.icourse163.org/vemooc" class="website-title">中国职教MOOC</a>
-						<a href="https://www.xuetangx.com/" class="website-title">学堂在线</a>
-						<a href="https://study.163.com/" class="website-title">网易云课堂</a>
-						<a href="https://open.163.com/" class="website-title">网易公开课</a>
-						<a href="https://www.yxgapp.com/" class="website-title">译学馆</a>
-						<a href="https://www.edx.org/" class="website-title">EDX</a>
-						<a href="https://www.icourses.cn/" class="website-title">爱课程</a>
-						<a href="https://www.cmooc.com/" class="website-title">MOOC中国</a>
-						<a href="http://www.chinesemooc.org/" class="website-title">华文慕课</a>
-						<a href="https://erya.mooc.chaoxing.com/" class="website-title">超星尔雅</a>
-						<br>
-						<a href="https://www.nlc.cn/" class="website-title">中国国家图书馆</a>
-						<a href="https://www.zjlib.cn/" class="website-title" title="支付宝扫码登陆">浙江图书馆</a>
-						<a href="https://www.eduyun.cn/" class="website-title">国家教育资源</a>
-						<a href="https://www.smartedu.cn/" class="website-title">国家智慧教育</a>
-						<a href="https://basic.smartedu.cn/" class="website-title">国家中小学智慧教育</a>
-					</div>   		
-        <h2 class="title">新闻鲜知</h2>
-                    <div class="line"></div>
-                    <div class="website-titles">
-						<a href="https://www.zaobao.com/" class="website-title">联合早报</a>
-						<a href="https://www.xuexi.cn/" class="website-title">学习强国</a>
-						<a href="https://tophub.today/" class="website-title">今日热榜</a>
-						<a href="https://rebang.today/" class="website-title">全站热榜</a>
-		            </div>  
-		<h2 class="title">软件插件</h2>
-		            <div class="line"></div>
-		            <div class="website-titles">
-						<a href="https://www.google.cn/intl/zh-CN/chrome/" class="website-title">谷歌浏览器</a>
-						<a href="https://www.chrome666.com/" class="website-title">谷歌插件</a>
-						<a href="https://www.crx4chrome.com/" class="website-title">Crx4chrome</a>
-						<a href="https://chrome.zzzmh.cn/" class="website-title">极简插件</a>
-						<a href="https://legado.aoaostar.com/" class="website-title">阅读APP源</a>
-						<a href="https://www.autoahk.com/" class="website-title">AutoHotkey</a>
-						<a href="https://greasyfork.org/zh-CN/scripts" class="website-title">油猴脚本</a>
-						<a href="https://scriptcat.org/zh-CN/" class="website-title">脚本猫</a>
-						<a href="https://www.youxiaohou.com/" class="website-title">游小猴</a>
-						<a href="https://wannengrun.net/zh/" class="website-title">万能命令</a>
-						<a href="https://www.oschina.net/" class="website-title">开源中国</a>
-						<a href="https://www.iplaysoft.com/" class="website-title">异次元软件世界</a>
-						<a href="https://www.ghxi.com/" class="website-title">果核剥壳</a>
-						<a href="http://www.th-sjy.com/" class="website-title">激活与汉化软件</a>
-		            </div>					 		
-		<h2 class="title">硬件刷机</h2>
-		            <div class="line"></div>
-		            <div class="website-titles">
-						<a href="https://laod.cn/3131.html" class="website-title">斐讯K2刷固件</a>
-		                <a href="https://www.idannywu.com/1126-2.html" class="website-title">路由器自动更新hosts教程</a>
-						<a href="http://www.nasyun.com/" class="website-title">那是云</a>
-		            </div>   
-		<h2 class="title">娱乐休闲</h2>
-		            <div class="line"></div>
-		            <div class="website-titles">
-						<a href="https://iui.su/531/" class="website-title">在线影视·不死鸟</a>
-						<a href="https://video.isyour.love/" class="website-title">邦宁云播</a>
-						<a href="https://fuliba2023.net/" class="website-title">福利吧</a>
-						<a href="http://www.qtjs.net/" class="website-title">囚徒健身</a>
-						<a href="https://tonzhon.com/" class="website-title">铜钟音乐</a>
-						<a href="http://weimp3.com/" class="website-title">唯音分享</a>
-						<a href="https://www.wangzhank.net/" class="website-title">醉长生</a>
-						<a href="https://fuun.fun/" class="website-title">奇趣网站</a>
-						<a href="https://www.tboxn.com/" class="website-title">Tbox导航</a>
-						<a href="http://www.tansuoo.com/" class="website-title">探索地球</a>
-						<a href="https://51.ruyo.net/" class="website-title">如有乐享</a>
-						<a href="https://www.chafanhou.com/" class="website-title">茶饭后</a>
-						<a href="https://www.fenxm.com/" class="website-title">分享迷</a>
-						<a href="https://caoniang.net/" class="website-title">我的鸡盒</a>
-						<a href="http://baoxiaobao.asia/baoxiaobao.html" class="website-title">宝小报</a>
-						<a href="https://raw.liucn.cc/" class="website-title">Lucky Coordinate</a>
-						<a href="http://webstack.cc/cn/index.html" class="website-title">设计师网址导航</a>
-					</div>		
-		    <h2 class="title">地下室</h2>
-					<div class="line"></div>       
-						<a href="https://jiejie.ukuk" ><font color="#808080">新建1</font></a>
-						<a href="https://www.tbk123.comco/" ><font color="#808080">新建2</font></a>
-						<a href="http://www.xgmeitu.comco/" ><font color="#808080">新建3</font></a>
-						<a href="https://www.1y.isis/" ><font color="#808080">新建4</font></a>
-						<a href="https://www.ku666.cccc/" ><font color="#808080">新建5</font></a>		
-		</div>
-		<div class="image">
-            <img src="https://pic.ziyuan.wang/user/guest/2024/02/53095932.jpg_large_d6f7b59bc5dd9.jpg" alt="头像">
-            <p class="description">自留地·后花园</p>
-        </div>
+
+<ul class="sidenav">
+  <li><a href="#guide1" onclick="showContent('guide1')" class="active">学习使人进步</a></li>
+  <li><a href="#guide2" onclick="showContent('guide2')">新闻鲜知</a></li>
+  <li><a href="#guide3" onclick="showContent('guide3')">软件、插件及硬件</a></li>
+  <li><a href="#guide4" onclick="showContent('guide4')">娱乐休闲</a></li>
+  <li><a href="#guide10" onclick="showContent('guide10')">地下室</a></li>
+  <img src="https://pic.ziyuan.wang/user/guest/2024/03/fish2_abe055592a6fa.png" alt="头像" class="rotate" style="margin-top: 20px; display: block; margin-left: auto; margin-right: auto;">
+  <p style="text-align: center; margin-top: 10px;">自留地·后花园</p>
+  <p style="text-align: center; margin-top: 20px;margin-left: 10px;margin-right: 10px;"><font color="#808080" size="2px">Copyright©2023-2024 自留地·后花园 | 所收录资源均收集于互联网公开分享，仅供交流学习，侵留言删！ </font></p>
+</ul>
+
+<div id="guide1" class="content" style="display: none;">
+  <h2 class="title">Python学习</h2>
+  <div class="line"></div>
+	<div class="website-titles">
+		<a href="https://www.runoob.com/python/python-tutorial.html" class="website-title"  target="_blank" >菜鸟网络</a>
+	    <a href="https://www.liaoxuefeng.com/wiki/1016959663602400" class="website-title"  target="_blank">廖雪峰</a>
+	    <a href="https://www.yuanrenxue.cn/python" class="website-title"  target="_blank">猿人学</a>
+		<a href="https://www.pythontab.com/" class="website-title"  target="_blank">Pythontab</a>
+		<a href="https://www.lmcjl.com/python" class="website-title"  target="_blank">Python教程</a>
+		<a href="https://www.byhy.net/tut/py/basic/01/" class="website-title"  target="_blank">Python教程</a>
+		<a href="https://github.com/jackfrued/Python-100-Days" class="website-title"  target="_blank">Python - 100天</a>
+  	</div>
+  <h2 class="title">学习资源·效率工具</h2>
+  <div class="line"></div>
+	<div class="website-titles">
+		<h3 class="title">学习与效率</h3>
+		<a href="https://search.chongbuluo.com/" class="website-title"  target="_blank">虫部落·快搜</a>
+		<a href="http://axutongxue.ysepan.com/" class="website-title"  target="_blank">阿虚同学的储物间</a>
+		<a href="http://qzbltushu.ysepan.com/" class="website-title"  target="_blank">金榜题名·考研</a>
+		<a href="https://tuostudy.upnb.top/" class="website-title"  target="_blank">图欧学习资源导航</a>		
+		<br>
+		<a href="https://github.com/GrowingGit/GitHub-Chinese-Top-Charts" class="website-title"  target="_blank">github中文排行榜</a>
+		<a href="https://www.guidebook.top/" class="website-title"  target="_blank">数字生活指南</a>
+		<a href="https://www.sssam.com/" class="website-title"  target="_blank">小白学术</a>
+		<a href="https://check.1kbtool.com/" class="website-title"  target="_blank" title="谷歌/github/维基百科/Z-Library/Sci-Hub/libgen">镜像收集</a>
+		<a href="https://sockstack.cn/github" class="website-title"  target="_blank" title="Chat/Sci-Hub/谷歌学术/libgen/github">镜像收集2</a>		
+		<h3 class="title">生成式AI</h3>
+		<a href="https://metaso.cn/" class="website-title"  target="_blank" title="AI搜索,可以免登陆">秘塔AI搜索</a>
+		<a href="https://kimi.moonshot.cn/ " class="website-title"  target="_blank" title="AI搜索和分析,手机号验证登陆">Kimi.ai</a>						
+		<a href="https://tongyi.aliyun.com/qianwen/" class="website-title"  target="_blank" title="通义多款产品之一,手机号验证登陆">阿里·通义千问</a>
+		<a href="https://beta.tiangong.cn/ " class="website-title"  target="_blank" title="AI对话,手机号验证登陆">天工AI</a>
+		<a href="https://chatglm.cn/ " class="website-title"  target="_blank" title="AI对话,手机号验证登陆">智谱清言</a>
+		<a href="https://xinghuo.xfyun.cn/" class="website-title"  target="_blank" title="手机号验证登陆">讯飞星火</a>
+		<a href="https://www.doubao.com/" class="website-title"  target="_blank" title="手机号或抖音账号登陆">抖音·豆包</a>
+		<a href="https://wenxin.baidu.com/" class="website-title"  target="_blank" title="手机号或百度账号登陆">百度·文心</a>
+		<a href="https://www.sou.com/ " class="website-title"  target="_blank" title="AI搜索,免登陆">360AI搜索</a>
+		<a href="https://chat.baidu.com/ " class="website-title"  target="_blank" title="AI对话,百度账号登陆">百度搜索AI伙伴</a>
+		<a href="https://smartread.cc/ " class="website-title"  target="_blank" title="AI文档分析,手机号验证登陆">司马阅</a>			
+		<br>
+		<a href="https://nav.free2gpt.xyz/" class="website-title"  target="_blank" title="3.5免费,免登陆">Free2gpt</a>
+		<a href="https://www.zaiwen.top/" class="website-title"  target="_blank" title="多模型免费,手机号验证登陆">在问</a>
+		<a href="https://www.gnomic.cn/" class="website-title"  target="_blank" title="3.5免费,微信或手机号验证登陆">诺米可-智能体</a>
+		<a href="https://ai.minihuo.com/" class="website-title"  target="_blank" title="3.5免费,手机号验证登陆">核桃Chat</a>
+		<a href="https://aigptx.top/" class="website-title"  target="_blank" title="3.5免费,邮箱登陆">OhMyGPT</a>
+		<a href="https://ai.nianxin.top/" class="website-title"  target="_blank" title="3.5免费,邮箱登陆">念心AI</a>		
+		<a href="https://www.zhidouai.com/" class="website-title"  target="_blank" title="3.5免费，每天签到送对话数量">知豆AI</a>
+		<a href="https://botvip.cn/" class="website-title"  target="_blank" title="多模型体验">AI对话鸭</a>
+		<a href="https://math-gpt.org/?model=unlimited" class="website-title"  target="_blank" title="免费免登陆分析数学题">MathGPT</a>
+		<br>
+		<a href="https://github.com/wgwang/awesome-LLMs-In-China " class="website-title"  target="_blank" title="">中国大模型列表</a>
+		<a href="https://aliendao.cn/  " class="website-title"  target="_blank" title="AI大模型加速下载">异型岛社区版</a>		
+		<h3 class="title">单枪匹马</h3>
+		<a href="https://github.com/easychen/one-person-businesses-methodology" class="website-title"  target="_blank">一人公司方法论</a>
+	    <a href="https://ziyuanpi.com/" class="website-title"  target="_blank" title="mu·1g">资源π</a>
+	</div>
+  <h2 class="title">学习平台</h2>
+  <div class="line"></div>
+	<div class="website-titles">
+		<a href="https://www.icourse163.org/" class="website-title"  target="_blank">中国大学MOOC</a>
+        <a href="https://www.icourse163.org/vemooc" class="website-title"  target="_blank">中国职教MOOC</a>
+		<a href="https://www.xuetangx.com/" class="website-title"  target="_blank">学堂在线</a>
+		<a href="https://study.163.com/" class="website-title"  target="_blank">网易云课堂</a>
+		<a href="https://open.163.com/" class="website-title"  target="_blank">网易公开课</a>
+		<a href="https://www.yxgapp.com/" class="website-title"  target="_blank">译学馆</a>
+		<a href="https://www.edx.org/" class="website-title"  target="_blank">EDX</a>
+		<a href="https://www.icourses.cn/" class="website-title"  target="_blank">爱课程</a>
+		<a href="https://www.cmooc.com/" class="website-title"  target="_blank">MOOC中国</a>
+		<a href="http://www.chinesemooc.org/" class="website-title"  target="_blank">华文慕课</a>
+		<a href="https://erya.mooc.chaoxing.com/" class="website-title"  target="_blank">超星尔雅</a>
+		<br>
+		<a href="https://www.nlc.cn/" class="website-title"  target="_blank">中国国家图书馆</a>
+		<a href="https://www.zjlib.cn/" class="website-title"  target="_blank" title="支付宝扫码登陆">浙江图书馆</a>
+		<a href="https://www.eduyun.cn/" class="website-title"  target="_blank">国家教育资源</a>
+		<a href="https://www.smartedu.cn/" class="website-title"  target="_blank">国家智慧教育</a>
+		<a href="https://basic.smartedu.cn/" class="website-title"  target="_blank">国家中小学智慧教育</a>		
+	</div>	
+</div>	
+
+<div id="guide2" class="content" style="display: none;">
+  <h2 class="title">新闻鲜知</h2>
+  <div class="line"></div>
+	<div class="website-titles">
+	    <a href="https://www.zaobao.com/" class="website-title"  target="_blank">联合早报</a>
+		<a href="https://www.xuexi.cn/" class="website-title"  target="_blank">学习强国</a>
+		<a href="https://tophub.today/" class="website-title"  target="_blank">今日热榜</a>
+		<a href="https://rebang.today/" class="website-title"  target="_blank">全站热榜</a>
+    </div>		
+</div>	
+
+<div id="guide3" class="content" style="display: none;">
+  <h2 class="title">软件插件</h2>
+  <div class="line"></div>
+	<div class="website-titles">
+		<a href="https://www.google.cn/intl/zh-CN/chrome/" class="website-title"  target="_blank">谷歌浏览器</a>
+		<a href="https://www.chrome666.com/" class="website-title"  target="_blank">谷歌插件</a>
+		<a href="https://www.crx4chrome.com/" class="website-title"  target="_blank">Crx4chrome</a>
+		<a href="https://chrome.zzzmh.cn/" class="website-title"  target="_blank">极简插件</a>
+		<br>
+		<a href="https://www.autoahk.com/" class="website-title"  target="_blank">AutoHotkey</a>
+		<a href="https://greasyfork.org/zh-CN/scripts" class="website-title"  target="_blank">油猴脚本</a>
+		<a href="https://scriptcat.org/zh-CN/" class="website-title"  target="_blank">脚本猫</a>
+		<a href="https://www.youxiaohou.com/" class="website-title"  target="_blank">游小猴</a>
+		<a href="https://wannengrun.net/zh/" class="website-title"  target="_blank">万能命令</a>
+		<br>
+		<a href="https://www.oschina.net/" class="website-title"  target="_blank">开源中国</a>
+		<a href="https://www.iplaysoft.com/" class="website-title"  target="_blank">异次元软件世界</a>
+		<a href="https://www.ghxi.com/" class="website-title"  target="_blank">果核剥壳</a>
+		<a href="http://www.th-sjy.com/" class="website-title"  target="_blank">激活与汉化软件</a>			
     </div>
-<div id="footer">
-<p><a><font color="#808080">Copyright©2023-2024 自留地·后花园 | 所收录资源均收集于互联网公开分享，仅供交流学习，侵留言删！ </font></a></p>
+  <h2 class="title">硬件刷机</h2>
+  <div class="line"></div>
+	<div class="website-titles">
+		<a href="https://laod.cn/3131.html" class="website-title"  target="_blank">斐讯K2刷固件</a>
+		<a href="https://www.idannywu.com/1126-2.html" class="website-title"  target="_blank">路由器自动更新hosts教程</a>
+		<a href="http://www.nasyun.com/" class="website-title"  target="_blank">那是云</a>	
+    </div>
 </div>
+
+<div id="guide4" class="content" style="display: none;">
+  <h2 class="title">休闲娱乐</h2>
+  <div class="line"></div>
+	<div class="website-titles">
+		<h3 class="title">视·阅·听</h3>
+		<a href="https://iui.su/531/" class="website-title"  target="_blank">在线影视·不死鸟</a>
+		<a href="https://video.isyour.love/" class="website-title"  target="_blank">邦宁云播</a>
+		<a href="https://tonzhon.com/" class="website-title"  target="_blank">铜钟音乐</a>
+		<a href="http://weimp3.com/" class="website-title"  target="_blank">唯音分享</a>
+		<a href="https://legado.aoaostar.com/" class="website-title"  target="_blank">阅读APP源</a>
+		<a href="https://raw.liucn.cc/" class="website-title"  target="_blank">Lucky Coordinate</a>		
+		<h3 class="title">娱乐·分享</h3>				
+		<a href="https://fuliba2023.net/" class="website-title"  target="_blank">福利吧</a>		
+		<a href="https://caoniang.net/" class="website-title"  target="_blank">我的鸡盒</a>
+		<a href="http://baoxiaobao.asia/baoxiaobao.html" class="website-title"  target="_blank">宝小报</a>
+		<a href="https://www.fenxm.com/" class="website-title"  target="_blank">分享迷</a>		
+		<a href="https://fuun.fun/" class="website-title"  target="_blank">奇趣网站</a>
+		<a href="https://www.tboxn.com/" class="website-title"  target="_blank">Tbox导航</a>
+		<a href="http://www.tansuoo.com/" class="website-title"  target="_blank">探索地球</a>
+		<a href="https://51.ruyo.net/" class="website-title"  target="_blank">如有乐享</a>				
+		<a href="https://www.chafanhou.com/" class="website-title"  target="_blank">茶饭后</a>		
+		<br>
+		<a href="http://www.qtjs.net/" class="website-title"  target="_blank">囚徒健身</a>
+		<a href="http://webstack.cc/cn/index.html" class="website-title"  target="_blank">设计师网址导航</a>
+	</div>
+</div>
+
+<div id="guide10" class="content" style="display: none;">
+  <h2 class="title">地下室</h2>
+  <div class="line"></div>
+		<a href="https://jiejie.ukuk" target="_blank"><font color="#808080">新建1</font></a>
+		<a href="https://www.tbk123.comco/" target="_blank"><font color="#808080">新建2</font></a>
+		<a href="http://www.xgmeitu.comco/" target="_blank"><font color="#808080">新建3</font></a>
+		<a href="https://www.1y.isis/" target="_blank"><font color="#808080">新建4</font></a>
+		<a href="https://www.ku666.cccc/" target="_blank"><font color="#808080">新建5</font></a>	
+</div>
+<script>
+// 初始化时显示主页内容
+document.getElementById('guide1').style.display = 'block';
+
+// 定义一个函数来显示对应的内容区域
+function showContent(id) {
+  // 首先隐藏所有内容区域
+  document.querySelectorAll('.content').forEach(function(content) {
+    content.style.display = 'none';
+  });
+
+  // 然后显示点击的内容区域
+  document.getElementById(id).style.display = 'block';
+
+  // 更新导航栏中当前激活项的样式
+  document.querySelectorAll('.sidenav a').forEach(function(anchor) {
+    anchor.classList.remove('active');
+  });
+  document.querySelector('.sidenav a[href="#' + id + '"]').classList.add('active');
+}
+
+// 设置分割线位置（默认黄金分割线）
+function setDividerPosition() {
+  var divider = document.getElementById('divider');
+  var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  var navHeight = document.querySelector('.sidenav').offsetHeight;
+  var desiredPosition = windowWidth * 0.618; // 计算黄金分割点位置
+  divider.style.left = desiredPosition + 'px';
+}
+
+// 页面加载完成后设置分割线位置
+window.onload = setDividerPosition;
+
+// 窗口尺寸改变时重新计算分割线位置
+window.onresize = setDividerPosition;
+</script>
+
 </body>
 </html>

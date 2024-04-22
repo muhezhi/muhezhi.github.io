@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>囚徒健身六艺十式</title>
+    <style>
+        img {
+            width: 100%;
+            height: auto;
+        }
+        .selector {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+        .selector button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+        .selector button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://s21.ax1x.com/2024/04/22/pkpHVUJ.jpg" alt="图片1">
+    <div class="selector">
+        <button onclick="changeImage(1)">1</button>
+        <button onclick="changeImage(2)">2</button>
+        <button onclick="changeImage(3)">3</button>
+        <button onclick="changeImage(4)">4</button>
+        <button onclick="changeImage(5)">5</button>
+        <button onclick="changeImage(6)">6</button>
+        <button onclick="changeImage(7)">7</button>
+        <button onclick="changeImage(8)">8</button>
+        <button onclick="changeImage(9)">9</button>
+        <button onclick="changeImage(10)">10</button>   
+	
+	</div>
+    <script>
+        let currentImage = 1;
+        const images = [
+            "https://s21.ax1x.com/2024/04/22/pkpHVUJ.jpg",
+            "https://s21.ax1x.com/2024/04/22/pkpHZ59.jpg",
+            "https://s21.ax1x.com/2024/04/22/pkpvNTK.jpg",
+			"https://s21.ax1x.com/2024/04/22/pkpHmCR.jpg",
+            "https://s21.ax1x.com/2024/04/22/pkpHn81.jpg",
+            "https://s21.ax1x.com/2024/04/22/pkpHugx.jpg",
+            "https://s21.ax1x.com/2024/04/22/pkpHKv6.jpg",
+            "https://s21.ax1x.com/2024/04/22/pkpHQKK.jpg",
+            "https://s21.ax1x.com/2024/04/22/pkpHlDO.jpg",
+            "https://s21.ax1x.com/2024/04/22/pkpvtw6.jpg"
+		];
+        function changeImage(num) {
+            if (num === currentImage) return;
+            document.querySelector("img").src = images[num - 1];
+            currentImage = num;
+            document.querySelectorAll(".selector button").forEach(btn => {
+                btn.disabled = btn.innerText === num.toString();
+            });
+        }
+    </script>
+</body>
+</html>

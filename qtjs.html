@@ -11,7 +11,7 @@
         }
         .selector {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             margin-top: 10px;
         }
         .selector button {
@@ -20,8 +20,11 @@
             border: none;
             background-color: #f0f0f0;
             cursor: pointer;
-        }
-        .selector button:disabled {
+            margin-right: 10px;
+		}
+        .selector button:last-child {
+            margin-right: 0; 
+		.selector button:disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }

@@ -5,9 +5,9 @@
   <title>小兔子</title>
   <base target="_blank">
   <style>
-  body {    /* 以下分别是背景颜色/内容溢出-滚动/外边距上下左右/内边距上下左右/布局-容器/容器内布局-中央对齐/容器内布局-位于开头/屏幕内容-可见高度100%/文本-水平居中 */
+  body {  /* 以下分别是背景颜色/内容溢出-隐藏/外边距上下左右/内边距上下左右/布局-容器/容器内布局-中央对齐/容器内布局-位于开头/屏幕内容-可见高度100%/文本-水平居中 */
     background-color: #e0f2f1;
-    overflow: scroll;
+    overflow: auto;
     margin: 0;
     padding: 0;
     display: flex;
@@ -16,7 +16,7 @@
     height: 100vh;
     text-align: center;
   }  
-  
+  /*注释掉雪花飘落代码,不执行这段代码
     .snowflake {
       position: absolute;
       color: white;
@@ -31,6 +31,13 @@
       100% {
         transform: translateY(100vh);
       }
+    }
+  */
+  
+  .bubble { /*这是气泡动态效果*/
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
     }
   
   #container {
@@ -50,6 +57,7 @@
       margin: 0 auto;
       border: 1px solid #A4A4A4;
       border-collapse: collapse;  
+      border-spacing: 0; /* 添加此行以避免单元格间距 */
   }
   
   #table td {
@@ -58,24 +66,36 @@
       border: 1px solid #A4A4A4;
       text-align: center;
   }
-  #table td a {
+  #table td a { 
       color: #2196F3;
+      text-decoration: none;
   }
-  
-  #table td:not(a) {
-      color: #000000;
-        }
   
   #footer {
       margin-top: 0px;
-      font-size: 16px;
-      text-align: left;
+      font-size: 8px;
+      text-align: center;
+  }
+  
+  .record-info {
+    font-size: 16px;
+    color: #2196F3;
+    text-decoration: none;
   }
   </style>
 </head>
 <body>
-  <script>
-    function createSnowflake() {
+  <script>// 为所有的<a>标签添加rel="noreferrer"属性，提高隐私性和安全性
+    document.addEventListener('DOMContentLoaded', function() {
+      var links = document.querySelectorAll('a');
+      for (var i = 0; i < links.length; i++) {
+       links[i].setAttribute('rel', 'noreferrer');
+    }
+    });
+  </script>
+  <!--注释掉雪花飘落代码,不执行这段代码
+  <script>// 雪花*生成和下雪JavaScript代码
+    function createSnowflake() { 
       const snowflake = document.createElement('div');
       snowflake.innerHTML = '❉';
       snowflake.className = 'snowflake';
@@ -96,8 +116,46 @@
       }, (randomDuration + randomDelay) * 1000);
     }
 
-    setInterval(createSnowflake, 2000); // 每2秒创建一个新的❉
+    setInterval(createSnowflake, 2000); // 每2秒创建一个新的❉  
   </script>
+  -->
+<script> // 这是气泡生成动态效果
+  function createBubble() {
+    const bubble = document.createElement('div');
+    bubble.classList.add('bubble');
+
+    // 随机位置
+    bubble.style.left = Math.random() * 100 + '%';
+    bubble.style.bottom = '50px'; // 修改为在屏幕底部以下生成，则要将‘’内改成负数，如-100px
+
+    // 随机大小
+    const size = Math.random() * 20 + 10; // +后面的数字改小可以减小气泡大小
+    bubble.style.width = size + 'px';
+    bubble.style.height = size + 'px';
+
+    // 随机透明度
+    bubble.style.opacity = Math.random();
+   
+    // 随机颜色
+    const color = 'rgba(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
+    bubble.style.backgroundColor = color;
+    
+    document.body.appendChild(bubble);
+
+    // 气泡上升动画，减慢速度，减小消失前的大小
+    bubble.animate([
+      { transform: 'translateY(0px) scale(1)', opacity: Math.random() },
+      { transform: 'translateY(-100vh) scale(1.5)', opacity: 0 } // 修改 scale(1.5) 为更小的大小
+    ], {
+      duration: Math.random() * 10000 + 10000, // 增加动画持续时间
+      easing: 'ease-in-out',
+      fill: 'forwards'
+    }).finished.then(() => bubble.remove());
+  }
+
+  // 减少气泡生成频率
+  setInterval(createBubble, 1000); // 修改为每秒生成一个气泡
+</script>
 <div id="container">
 <div id="title">
 	{\__/}<br>
@@ -283,18 +341,14 @@
 <td align="center">++<a href="http://yun.360xkw.com/yunmanager/manager/login.html">·AIO</a>++</td>
 <td align="center">++<a href="http://www.360xkw.com/class/course.html">·在线学习</a>++</td>
 </tr>
-<tr>
-<td align="center"><strong>西工网院（备）</strong></td>
-<td align="center"><a href="http://219.144.186.221/">网站首页</a></td>
-<td align="center"><a href="http://222.90.211.67/">教学教务</a></td>
-<td align="center"><a href="http://1.85.53.182/OlineExamWeb">入学测试</a></td>
-<td align="center"><a href="http://1.85.53.182/ElearningWebPlatform">在线学习</a></td>
-</tr>
 </tbody>
 </table>
 <div id="footer">
-<p><img src="https://s1.ax1x.com/2023/03/24/pp0XhQg.png" alt="" title="https://www.beian.gov.cn/apply/staticWebInfo"><a href="https://beian.mps.gov.cn/#/query/webSearch?code=36011102000828" rel="noreferrer" target="_blank"><font color="#2196F3">赣公网安备36011102000828</font></a>|<a 
-href="https://beian.miit.gov.cn/"><font color="#2196F3">赣ICP备2023001426号-1</font></a></p>
+  <p>
+    <img src="https://s1.ax1x.com/2023/03/24/pp0XhQg.png" alt="">
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=36011102000828" class="record-info">赣公网安备36011102000828</a>&nbsp;|&nbsp;
+    <a href="https://beian.miit.gov.cn/" class="record-info">赣ICP备2023001426号-1</a>
+  </p>
 </div>
 </div>
 </body>

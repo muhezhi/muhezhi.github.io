@@ -5,9 +5,9 @@
   <title>小兔子</title>
   <base target="_blank">
   <style>
-  body {  /* 以下分别是背景颜色/内容溢出-隐藏/外边距上下左右/内边距上下左右/布局-容器/容器内布局-中央对齐/容器内布局-位于开头/屏幕内容-可见高度100%/文本-水平居中 */
+  body {  /* 以下分别是背景颜色/内容溢出-显示可见/外边距上下左右/内边距上下左右/布局-容器/容器内布局-中央对齐/容器内布局-位于开头/屏幕内容-可见高度100%/文本-水平居中 */
     background-color: #e0f2f1;
-    overflow: auto;
+    overflow: visible;
     margin: 0;
     padding: 0;
     display: flex;
@@ -126,7 +126,7 @@
 
     // 随机位置
     bubble.style.left = Math.random() * 100 + '%';
-    bubble.style.bottom = '50px'; // 修改为在屏幕底部以下生成，则要将‘’内改成负数，如-100px
+    bubble.style.bottom = '50px'; // 在屏幕底部以下生成，则要将‘’内改成负数，如-100px
 
     // 随机大小
     const size = Math.random() * 20 + 10; // +后面的数字改小可以减小气泡大小
@@ -153,8 +153,8 @@
     }).finished.then(() => bubble.remove());
   }
 
-  // 减少气泡生成频率
-  setInterval(createBubble, 1000); // 修改为每秒生成一个气泡
+  // 气泡生成频率
+  setInterval(createBubble, 1000); // 每秒生成一个气泡
 </script>
 <div id="container">
 <div id="title">
@@ -317,11 +317,11 @@
 <td align="center"><strong>工具————</strong></td>
 <td align="center"><strong><a href="https://www.remove.bg/zh">照片换底</a></strong></td>
 <td align="center"><strong><a href="https://photokit.com/?lang=zh">照片换底（备）</a></strong></td>
-<td align="center"><strong><a href="http://www.blpack.com/">文档服务</a></strong></td>
-<td align="center"><strong><a href="https://tool.browser.qq.com/">帮小忙</a></strong></td>
+<td align="center"><strong><a href="http://www.blpack.com/" title="低成本下载百度文库">文档服务</a></strong></td>
+<td align="center"><strong><a href="https://tool.browser.qq.com/" title="腾讯qq浏览器在线工具箱,部分收费">帮小忙</a></strong></td>
 </tr>
 <tr>
-<td align="center"><strong><a href="https://hellowindows.cn/">HelloWindows</a></strong></td>
+<td align="center"><strong><a href="https://hellowindows.cn/" title="备用及更多https://alist.govm.cloud/">HelloWindows</a></strong></td>
 <td align="center"><strong><a href="https://www.wepe.com.cn/">微PE工具箱</a></strong></td>
 <td align="center"><strong><a href="https://www.waifu2x.net/">无损放大</a></strong></td>
 <td align="center"><strong><a href="https://cowtransfer.com/">奶牛快传</a></strong></td>
@@ -332,7 +332,7 @@
 <td align="center"><strong><a href="https://www.runoob.com/note/56524">Git常用命令大全</a></strong></td>
 <td align="center"><strong><a href="https://c.runoob.com/front-end/61/">HTML/CSS/JS 在线工具</a></strong></td>
 <td align="center"><strong><a href="https://py3.codeskulptor.org/">Python在线IDE</a></strong></td>
-<td align="center"><strong><a href="https://www.67tool.com/">即时工具</a></strong></td>
+<td align="center"><strong><a href="https://www.67tool.com/" title="非会员有一定限制">即时工具</a></strong></td>
 </tr>
 <tr>
 <td align="center"><strong><a href="https://tools.pdf24.org/zh/all-tools">PDF24 Tools</a></strong></td>

@@ -1,21 +1,22 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+<head>
   <meta charset="utf-8">
   <title>小兔子</title>
   <base target="_blank">
   <style>
-  body {  /* 以下分别是背景颜色/内容溢出-显示可见/外边距上下左右/内边距上下左右/布局-容器/容器内布局-中央对齐/容器内布局-位于开头/屏幕内容-可见高度100%/文本-水平居中 */
-    background-color: #e0f2f1;
-    overflow: visible;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
-    text-align: center;
-  }  
+  body {  
+      background-color: #e0f2f1; /* 背景颜色 */
+      overflow: visible; /* 内容溢出可见 */
+      margin: 0; /* 外边距归零 */
+      padding: 0; /* 内边距归零 */
+      display: flex; /* 弹性布局 */
+      justify-content: center; /* 水平居中 */
+      align-items: flex-start; /* 垂直居开头 */
+      height: 100vh; /* 高度占满视口 */
+      text-align: center; /* 文本居中 */
+    }
   /*注释掉雪花飘落代码,不执行这段代码
     .snowflake {
       position: absolute;
@@ -83,14 +84,10 @@
     text-decoration: none;
   }
   </style>
-</head>
-<body>
-  <script>// 为所有的<a>标签添加rel="noreferrer"属性，提高隐私性和安全性
+  <script>
+    // 为所有<a>标签添加rel="noreferrer"属性，提高隐私性和安全性;使用了forEach方法来简化
     document.addEventListener('DOMContentLoaded', function() {
-      var links = document.querySelectorAll('a');
-      for (var i = 0; i < links.length; i++) {
-       links[i].setAttribute('rel', 'noreferrer');
-    }
+      document.querySelectorAll('a').forEach(link => link.setAttribute('rel', 'noreferrer'));
     });
   </script>
   <!--注释掉雪花飘落代码,不执行这段代码
@@ -119,50 +116,42 @@
     setInterval(createSnowflake, 2000); // 每2秒创建一个新的❉  
   </script>
   -->
-<script> // 这是气泡生成动态效果
-  function createBubble() {
-    const bubble = document.createElement('div');
-    bubble.classList.add('bubble');
-
-    // 随机位置
-    bubble.style.left = Math.random() * 100 + '%';
-    bubble.style.bottom = '50px'; // 在屏幕底部以下生成，则要将‘’内改成负数，如-100px
-
-    // 随机大小
-    const size = Math.random() * 20 + 10; // +后面的数字改小可以减小气泡大小
-    bubble.style.width = size + 'px';
-    bubble.style.height = size + 'px';
-
-    // 随机透明度
-    bubble.style.opacity = Math.random();
-   
-    // 随机颜色
-    const color = 'rgba(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
-    bubble.style.backgroundColor = color;
-    
-    document.body.appendChild(bubble);
-
-    // 气泡上升动画，减慢速度，减小消失前的大小
-    bubble.animate([
-      { transform: 'translateY(0px) scale(1)', opacity: Math.random() },
-      { transform: 'translateY(-100vh) scale(1.5)', opacity: 0 } // 修改 scale(1.5) 为更小的大小
-    ], {
-      duration: Math.random() * 10000 + 10000, // 增加动画持续时间
-      easing: 'ease-in-out',
-      fill: 'forwards'
-    }).finished.then(() => bubble.remove());
-  }
-
-  // 气泡生成频率
-  setInterval(createBubble, 1000); // 每秒生成一个气泡
-</script>
-<div id="container">
-<div id="title">
-	{\__/}<br>
-	  ( •̀∀•́)<br>
-	  / ⊃/ ⊃<a style="color: #ff0000;white-space: pre;">小兔子               </a>
-	     <a href="#" id="hitokoto_text" style="color: #2196F3;"></a>
-	<script>  <!--一言-->
+  <script>
+    // 气泡生成动态效果
+      function createBubble() {
+      // 创建一个新的div元素作为气泡
+      const bubble = document.createElement('div');
+      // 为气泡添加一个类名，以便可以应用CSS样式
+      bubble.classList.add('bubble');
+      // 随机设置气泡的横坐标位置
+      bubble.style.left = Math.random() * 100 + '%';
+      // 设置气泡的初始纵坐标位置
+      bubble.style.bottom = '50px';
+      // 随机生成气泡的大小，范围在10到30像素之间
+      const size = Math.random() * 20 + 10;
+      // 设置气泡的宽度和高度
+      bubble.style.width = size + 'px';
+      bubble.style.height = size + 'px';
+      // 随机设置气泡的透明度
+      bubble.style.opacity = Math.random();
+      // 随机生成气泡的背景颜色
+      bubble.style.backgroundColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+      // 将气泡添加到文档的body中
+      document.body.appendChild(bubble);
+      // 使用动画效果移动气泡，从底部到顶部，并逐渐减小大小和透明度
+      bubble.animate([
+        { transform: 'translateY(0px) scale(1)', opacity: Math.random() }, // 动画起始状态
+        { transform: 'translateY(-100vh) scale(0.5)', opacity: 0 } // 动画结束状态
+      ], {
+        duration: Math.random() * 10000 + 10000, // 动画持续时间，随机在10到20秒之间
+        easing: 'ease-in-out', // 动画缓动函数
+        fill: 'forwards' // 动画结束后保持结束状态
+      }).finished.then(() => bubble.remove()); // 动画完成后移除气泡元素
+    }
+    // 设置定时器，每秒调用一次createBubble函数，生成一个气泡
+    setInterval(createBubble, 1000);
+  </script>
+  <script>  <!--一言-->
 	    fetch('https://v1.hitokoto.cn/??c=d&c=i ')
 	        .then(response => response.json())
 	        .then(data => {
@@ -171,179 +160,226 @@
 	            hitokoto.innerText = `一言：${data.hitokoto}`
 	        })
 	        .catch(console.error)
-	</script>
-</div>
-<table id="table">
-<td align="center"><strong>部分网络教育院校统一入口</strong></td>
-<td align="center"><strong><a href="https://www.beiwaionline.com/">北京外国语大学</a></strong></td>
-<td align="center"><strong><a href="https://www.strongsee.com/bjwgydx/">北外在线考试监控</a></strong></td>
-<td align="center"><strong><a href="https://www.swufe-online.com/">西南财经大学</a></strong></td>
-<td align="center"><strong><a href="http://www.edufe.com.cn/">东北财经大学</a></strong></td>
-<tbody>
-<tr>
-<td align="center"><strong><a href="http://www.swust.net.cn/">西南科技大学</a></strong></td>
-<td align="center"><strong><a href="https://www.eduwest.com/">西南大学</a></strong></td>
-<td align="center"><strong><a href="http://zjy.ccnu.edu.cn/xljy/wljy.htm">华中师范大学</a></strong></td>
-<td align="center"><strong><a href="http://sce.neu.edu.cn/">东北大学</a></strong></td>
-<td align="center"><strong><a href=""></a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong>奥鹏</strong></td>
-<td align="center"><strong><a href="https://www.iopen.com.cn/oes/">奥鹏OES</a></strong></td>
-<td align="center"><strong><a href="https://www.iopen.com.cn/service/index.html">奥鹏服务大厅</a></strong></td>
-<td align="center"><strong><a href=""></a></strong></td>
-<td align="center"><strong><a href=""></a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong>电子科技大学网络教育学院</strong></td>
-<td align="center"><strong><a href="https://www.uestcedu.com/">电子科技大学</a></strong></td>
-<td align="center"><strong><a href="https://uestccourse.exam-cloud.cn/">电科考试云平台</a></strong></td>
-<td align="center"><strong><a href="https://learn.uestcedu.com/ap/index.html">电科统考平台</a></strong></td>
-<td align="center"><strong><a href="https://sso-idp.uestcedu.com/">统一身份认证</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong>西北工业大学网络教育学院</strong></td>
-<td align="center"><strong><a href="http://www.nwpunec.net/">西北工业大学</a></strong></td>
-<td align="center"><strong><a href="http://old.nwpunec.net:8085/">西工考试查询</a></strong></td>
-<td align="center"><strong><a href="http://vpcs.cqvip.com/organ/lib/nwpunec/">西工论文查重</a></strong></td>
-<td align="center"><strong><a href="https://uestc.lun51.com/jxjy">电科论文格式检测</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong>江南大学网络教育学院</strong></td>
-<td align="center"><strong><a href="https://sce.jiangnan.edu.cn/wljy/zxtz.htm">江大网院（新）</a></strong></td>
-<td align="center"><strong><a href="http://jndx.cep.webtrn.cn/np/#/login">江大网院论文（临）</a></strong></td>
-<td align="center"><strong><a href="https://vpcs.fanyu.com/personal/jnjx">江大网院论文查重</a></strong></td>
-<td align="center"><strong><a href=""></a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong>陕西师范大学网络教育学院</strong></td>
-<td align="center"><strong><a href="http://www.snnu.net/webedu/">陕西师范大学</a></strong></td>
-<td align="center"><strong><a href="http://netstu.snnu.net/Login.aspx">学生平台</a></strong></td>
-<td align="center"><strong><a href="http://www.sne.snnu.edu.cn:8080/">学习中心管理平台</a></strong></td>
-<td align="center"><strong><a href="http://www.snnu.net/portal.php?mod=view&amp;aid=2879">陕师机考客户端</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong><a href="https://www.snnu.net/portal.php?mod=view&aid=2728">陕师考查课</a></strong></td>
-<td align="center"><strong><a href="http://mpl.snnu.net/">陕师论文系统</a></strong></td>
-<td align="center"><strong><a href="http://vpcs.cqvip.com/organ/lib/sxsfjxjy/">维普论文检测-学生</a></strong></td>
-<td align="center"><strong><a href=""></a></strong></td>
-<td align="center"><strong><a href=""></a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong>中国传媒大学网络教育学院</strong></td>
-<td align="center"><strong><a href="http://www.cuconline.cn/">中国传媒大学</a></strong></td>
-<td align="center"><strong><a href="https://tk.webtrn.cn/">统考平台</a></strong></td>
-<td align="center"><strong><a href="http://elearn.cuc.edu.cn/edu3/default.aspx">教务管理平台（旧）</a></strong></td>
-<td align="center"><strong><a href="https://report.mdedu.cuc.edu.cn/Reports/Pages/Folder.aspx">报表系统</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong><a href="http://mdedu.cuc.edu.cn/Login.aspx?type=2">学生平台（旧）</a></strong></td>
-<td align="center"><strong><a href="http://wljy.cuc.edu.cn/elearn/login.aspx">学生平台（旧备）</a></strong></td>
-<td align="center"><strong><a href="https://eo.cuc.edu.cn">管理及学习平台（新）</a></strong></td>
-<td align="center"><strong><a href="https://thesis.mdedu.cuc.edu.cn/">毕业论文系统</a></strong></td>
-<td align="center"><strong><a href="https://vpcs.fanyu.com/personal/ece">维普论文查重-学生</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong>国家开放大学</strong></td>
-<td align="center"><strong><a href="http://one.ouchn.cn/">国开学习网（新）</a></strong></td>
-<td align="center"><strong><a href="http://www.ouchn.cn/">国开学习网（旧）</a></strong></td>
-<td align="center"><strong><a href="http://www.ouchn.edu.cn/">国开门户</a></strong></td>
-<td align="center"><strong><a href=""></a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong><a href=""></a></strong></td>
-<td align="center"><strong><a href="https://www.yxybb.com/YXYBB/LEAP/html/index.html">保宝网</a></strong></td>
-<td align="center"><strong><a href="https://sso.bjou.edu.cn/login#/">北京开放大学</a></strong></td>
-<td align="center"><strong><a href="https://course.ougd.cn/">广东开放大学</a></strong></td>
-<td align="center"><a href="https://910424.yichafen.com/" title="已弃用,留目">学号查询</a></td>
-</tr>
-<tr>
-<td align="center"><strong>重庆大学网络教育学院</strong></td>
-<td align="center"><strong><a href="https://www.5any.com">重庆大学</a></strong></td>
-<td align="center"><strong><a href="https://passport.5any.com/Passport/WebUI">工作平台</a></strong></td>
-<td align="center"><strong><a href="https://passport.5any.com/Passport/WebUI">学生个人平台</a></strong></td>
-<td align="center"><strong><a href="http://manage.5any.com:8000/login.asp">管理平台（备）</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong>西安交通大学网络教育学院</strong></td>
-<td align="center"><strong><a href="https://www.xjtudlc.com/">西安交通大学</a></strong></td>
-<td align="center"><strong><a href="https://mxueli.xjtudlc.com/login.aspx">管理平台</a></strong></td>
-<td align="center"><strong><a href="http://xueli.xjtudlc.com/login1.aspx">学习平台</a></strong></td>
-<td align="center"><strong><a href="https://xjtu.exam-cloud.cn/">考试云平台</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong>其他常用网站————</strong></td>
-<td align="center"><strong><a href="https://www.chsi.com.cn/">学信网</a></strong></td>
-<td align="center"><strong><a href="http://www.xinhuacu.com/">图像采集</a></strong></td>
-<td align="center"><strong><a href="https://vpcs.fanyu.com/portal">维普个人查重</a></strong></td>
-<td align="center"><strong><a href="https://cx.cnki.net/main.html#/login">知网个人查重</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong><a href="https://gaokao.chsi.com.cn/zyk/zybk/">专业代码</a></strong></td>
-<td align="center"><strong><a href="https://www.neea.edu.cn/">中国教育考试网</a></strong></td>
-<td align="center"><strong><a href="https://pets.neea.edu.cn/">公共英语</a></strong></td>
-<td align="center"><strong><a href="https://ncre.neea.edu.cn/">计算机等级</a></strong></td>
-<td align="center"><strong><a href="https://cjcx.neea.edu.cn/html1/folder/21045/4883-1.htm">英语四六级</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong><a href="http://www.jxeea.cn/">江西省教育考试院</a></strong></td>
-<td align="center"><strong><a href="http://www.jxpta.com/index.html">江西人事考试网</a></strong></td>
-<td align="center"><strong><a href="http://kzp.mof.gov.cn/index.jsp">全国会计资格</a></strong></td>
-<td align="center"><strong><a href="http://pjcy.mof.gov.cn/">发票验证</a></strong></td>
-<td align="center"><strong><a href="https://www.codexy.cn/xycode/#/">院校代码查询-备</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong><a href="https://www.jszg.edu.cn/">中国教师资格网</a></strong></td>
-<td align="center"><strong><a href="http://jyt.jiangxi.gov.cn/">江西教育网</a></strong></td>
-<td align="center"><strong><a href="https://www.icvio.cn/bank">联行号</a></strong></td>
-<td align="center"><strong><a href=""></a></strong></td>
-<td align="center"><strong><a href="https://www.zjlib.cn/" title="支付宝扫描登陆">浙江图书馆</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong><a href=""></a></strong></td>
-<td align="center"><strong><a href="https://dsa.dayainfo.com/">大雅相似度分析</a></strong></td>
-<td align="center"><a href="https://www.yuque.com/baizefeilian/bg?" title="密码：sckx"><strong>语雀</strong></a></td>
-<td align="center"><strong><a href="http://wj2020.ysepan.com/" title="密码：Aa123456">永硕E盘</a></strong></td>
-<td align="center"><a href="https://www.academic-res.com/">云端学术资源</a></td>
-</tr>
-<tr>
-<td align="center"><strong>工具————</strong></td>
-<td align="center"><strong><a href="https://www.remove.bg/zh">照片换底</a></strong></td>
-<td align="center"><strong><a href="https://photokit.com/?lang=zh">照片换底（备）</a></strong></td>
-<td align="center"><strong><a href="http://www.blpack.com/" title="低成本下载百度文库">文档服务</a></strong></td>
-<td align="center"><strong><a href="https://tool.browser.qq.com/" title="腾讯qq浏览器在线工具箱,部分收费">帮小忙</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong><a href="https://hellowindows.cn/" title="备用及更多https://alist.govm.cloud/">HelloWindows</a></strong></td>
-<td align="center"><strong><a href="https://www.wepe.com.cn/">微PE工具箱</a></strong></td>
-<td align="center"><strong><a href="https://www.waifu2x.net/">无损放大</a></strong></td>
-<td align="center"><strong><a href="https://cowtransfer.com/">奶牛快传</a></strong></td>
-<td align="center"><strong><a href="https://www.wenshushu.cn/">文叔叔</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong><a href="https://stackedit.cn/">Markdown在线编辑</a></strong></td>
-<td align="center"><strong><a href="https://www.runoob.com/note/56524">Git常用命令大全</a></strong></td>
-<td align="center"><strong><a href="https://c.runoob.com/front-end/61/">HTML/CSS/JS 在线工具</a></strong></td>
-<td align="center"><strong><a href="https://py3.codeskulptor.org/">Python在线IDE</a></strong></td>
-<td align="center"><strong><a href="https://www.67tool.com/" title="非会员有一定限制">即时工具</a></strong></td>
-</tr>
-<tr>
-<td align="center"><strong><a href="https://tools.pdf24.org/zh/all-tools">PDF24 Tools</a></strong></td>
-<td align="center"><strong><a href="https://www.ijiaodui.com/">爱校对</a></strong></td>
-<!--自留地有道云备用链接及使用相对路径实现同一目录下打开自留地页面（上级目录则使用"../ziliudi.html"） -->
-<td align="center">++<a href="https://note.youdao.com/s/R5L6y85K">·自留地</a>++<a href="ziliudi.html">·自留地</a></td>
-<td align="center">++<a href="http://yun.360xkw.com/yunmanager/manager/login.html">·AIO</a>++</td>
-<td align="center">++<a href="http://www.360xkw.com/class/course.html">·在线学习</a>++</td>
-</tr>
-</tbody>
-</table>
-<div id="footer">
-  <p>
-    <img src="https://s1.ax1x.com/2023/03/24/pp0XhQg.png" alt="">
-    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=36011102000828" class="record-info">赣公网安备36011102000828</a>&nbsp;|&nbsp;
-    <a href="https://beian.miit.gov.cn/" class="record-info">赣ICP备2023001426号-1</a>
-  </p>
-</div>
-</div>
+  </script>
+  <style>
+  //修改菜鸟工具基本下拉菜单代码,使显示下拉菜单,以便显示更多内容(https://www.jyshare.com/codedemo/449/)
+  /* 容器 <div> - 需要定位下拉内容 */
+  .dropdown
+  {
+    position:relative;
+    display:inline-block;
+  }
+  /* 下拉内容 (默认隐藏) */
+  .dropdown-content{
+    display:none;
+    position:absolute;
+    background-color:#e0f2f1;
+    min-width:60px;
+    box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+  }
+  /* 下拉菜单的链接 */
+  .dropdown-content a{
+    padding:6px 8px;
+    text-decoration:none;
+    display:block;
+  }
+  /* 鼠标移上去后修改下拉菜单链接颜色 */
+  .dropdown-content a:hover{background-color: #c9f2f1}
+  
+  /* 在鼠标移上去后显示下拉菜单 */
+  .dropdown:hover .dropdown-content{
+    display:block;
+  }
+  </style>
+</head>
+<body>
+  <div id="container">
+  <div id="title">
+	{\__/}<br>
+	  ( •̀∀•́)<br>
+	  / ⊃/ ⊃<a style="color: #ff0000;white-space: pre;">小兔子(ง •̀_•́)ง               </a>
+	     <a href="#" id="hitokoto_text" style="color: #2196F3;"></a>
+
+  </div>
+  <table id="table">
+  <td align="center"><strong>部分网络教育院校统一入口</strong></td>
+  <td align="center"><strong><a href="https://www.beiwaionline.com/">北京外国语大学</a></strong></td>
+  <td align="center"><strong><a href="https://www.strongsee.com/bjwgydx/">北外在线考试监控</a></strong></td>
+  <td align="center"><strong><a href="https://www.swufe-online.com/">西南财经大学</a></strong></td>
+  <td align="center"><strong><a href="http://www.edufe.com.cn/">东北财经大学</a></strong></td>
+  <tbody>
+  <tr>
+  <td align="center"><strong><a href="http://www.swust.net.cn/">西南科技大学</a></strong></td>
+  <td align="center"><strong><a href="https://www.eduwest.com/">西南大学</a></strong></td>
+  <td align="center"><strong><a href="http://zjy.ccnu.edu.cn/xljy/wljy.htm">华中师范大学</a></strong></td>
+  <td align="center"><strong><a href="http://sce.neu.edu.cn/">东北大学</a></strong></td>
+  <td align="center"><strong><a href=""></a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong>奥鹏</strong></td>
+  <td align="center"><strong><a href="https://www.iopen.com.cn/oes/">奥鹏OES</a></strong></td>
+  <td align="center"><strong><a href="https://www.iopen.com.cn/service/index.html">奥鹏服务大厅</a></strong></td>
+  <td align="center"><strong><a href=""></a></strong></td>
+  <td align="center"><strong><a href=""></a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong>电子科技大学网络教育学院</strong></td>
+  <td align="center"><strong><a href="https://www.uestcedu.com/">电子科技大学</a></strong></td>
+  <td align="center"><strong><a href="https://uestccourse.exam-cloud.cn/">电科考试云平台</a></strong></td>
+  <td align="center"><strong><a href="https://learn.uestcedu.com/ap/index.html">电科统考平台</a></strong></td>
+  <td align="center"><strong><a href="https://uestc.lun51.com/jxjy">电科论文格式检测</a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong>西北工业大学网络教育学院</strong></td>
+  <td align="center"><strong><a href="http://www.nwpunec.net/">西北工业大学</a></strong></td>
+  <td align="center"><strong><a href="http://old.nwpunec.net:8085/">西工考试情况查询</a></strong></td>
+  <td align="center"><strong><a href="http://vpcs.cqvip.com/organ/lib/nwpunec/">西工论文查重</a></strong></td>
+  <td align="center"><strong><a href=""></a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong>江南大学网络教育学院</strong></td>
+  <td align="center"><strong><a href="https://sce.jiangnan.edu.cn/wljy/zxtz.htm">江大网院（新）</a></strong></td>
+  <td align="center"><strong><a href="https://vpcs.fanyu.com/personal/jnjx">江大网院论文查重</a></strong></td>
+  <td align="center"><strong><a href=""></a></strong></td>
+  <td align="center"><strong><a href=""></a></strong></td>  
+  </tr>
+  <tr>
+  <td align="center"><strong>陕西师范大学网络教育学院</strong></td>
+  <td align="center"><strong><a href="http://www.snnu.net/webedu/">陕西师范大学</a></strong></td>
+  <td align="center"><strong><a href="http://netstu.snnu.net/Login.aspx">学生平台</a></strong></td>
+  <td align="center"><strong><a href="http://www.sne.snnu.edu.cn:8080/">学习中心管理平台</a></strong></td>
+  <td align="center"><strong><a href="http://www.snnu.net/portal.php?mod=view&amp;aid=2879">陕师机考客户端</a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong><a href="https://www.snnu.net/portal.php?mod=view&aid=2728">陕师考查课</a></strong></td>
+  <td align="center"><strong><a href="http://mpl.snnu.net/">陕师论文及学位系统</a></strong></td>
+  <td align="center"><strong><a href="http://vpcs.cqvip.com/organ/lib/sxsfjxjy/">维普论文检测-学生</a></strong></td>
+  <td align="center"><strong><a href=""></a></strong></td>
+  <td align="center"><strong><a href=""></a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong>中国传媒大学网络教育学院</strong></td>
+  <td align="center"><strong><a href="http://www.cuconline.cn/">中国传媒大学</a></strong></td>
+  <td align="center"><strong><a href="https://tk.webtrn.cn/">统考平台</a></strong></td>
+  <td align="center"><strong><a href="http://elearn.cuc.edu.cn/edu3/default.aspx">教务管理平台（旧）</a></strong></td>
+  <td align="center"><strong><a href="https://report.mdedu.cuc.edu.cn/Reports/Pages/Folder.aspx">报表系统</a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong><a href="http://mdedu.cuc.edu.cn/Login.aspx?type=2">学生平台（旧）</a></strong></td>
+  <td align="center"><strong><a href="http://wljy.cuc.edu.cn/elearn/login.aspx">学生平台（旧备）</a></strong></td>
+  <td align="center"><strong><a href="https://eo.cuc.edu.cn">管理及学习平台（新）</a></strong></td>
+  <td align="center"><strong><a href="https://thesis.mdedu.cuc.edu.cn/">毕业论文系统</a></strong></td>
+  <td align="center"><strong><a href="https://vpcs.fanyu.com/personal/ece">维普论文查重-学生</a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong>国家开放大学</strong></td>
+  <td align="center"><strong><a href="http://one.ouchn.cn/">国开学习网（新）</a></strong></td>
+  <td align="center"><strong><a href="http://www.ouchn.cn/">国开学习网（旧）</a></strong></td>
+  <td align="center"><strong><a href="http://www.ouchn.edu.cn/">国开门户</a></strong></td>
+  <td align="center"><strong><a href=""></a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong><a href=""></a></strong></td>
+  <td align="center"><strong><a href="https://www.yxybb.com/YXYBB/LEAP/html/index.html">保宝网</a></strong></td>
+  <td align="center"><strong><a href="https://sso.bjou.edu.cn/login#/">北京开放大学</a></strong></td>
+  <td align="center"><strong><a href="https://course.ougd.cn/">广东开放大学</a></strong></td>
+  <td align="center"><a href="https://910424.yichafen.com/" title="已弃用,留目">学号查询</a></td>
+  </tr>
+  <tr>
+  <td align="center"><strong>重庆大学网络教育学院</strong></td>
+  <td align="center"><strong><a href="https://www.5any.com">重庆大学</a></strong></td>
+  <td align="center"><strong><a href="https://passport.5any.com/Passport/WebUI">工作平台</a></strong></td>
+  <td align="center"><strong><a href="https://passport.5any.com/Passport/WebUI">学生个人平台</a></strong></td>
+  <td align="center"><strong><a href="http://manage.5any.com:8000/login.asp">管理平台（备）</a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong>西安交通大学网络教育学院</strong></td>
+  <td align="center"><strong><a href="https://www.xjtudlc.com/">西安交通大学</a></strong></td>
+  <td align="center"><strong><a href="https://mxueli.xjtudlc.com/login.aspx">管理平台</a></strong></td>
+  <td align="center"><strong><a href="http://xueli.xjtudlc.com/login1.aspx">学习平台</a></strong></td>
+  <td align="center"><strong><a href="https://xjtu.exam-cloud.cn/">考试云平台</a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong>其他常用网站————</strong></td>
+  <td align="center"><strong><a href="https://www.chsi.com.cn/">学信网</a></strong></td>
+  <td align="center"><strong><a href="http://www.xinhuacu.com/">中国图片社图像采集</a></strong></td>
+  <td align="center"><strong><a href="https://vpcs.fanyu.com/portal">维普个人查重</a></strong></td>
+  <td align="center"><strong><a href="https://cx.cnki.net/main.html#/login">知网个人查重</a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong><a href="https://gaokao.chsi.com.cn/zyk/zybk/">专业代码</a></strong></td>
+  <td align="center"><strong><a href="https://www.neea.edu.cn/">中国教育考试网</a></strong></td>
+  <td align="center"><strong><a href="https://pets.neea.edu.cn/">公共英语</a></strong></td>
+  <td align="center"><strong><a href="https://ncre.neea.edu.cn/">计算机等级</a></strong></td>
+  <td align="center"><strong><a href="https://cjcx.neea.edu.cn/html1/folder/21045/4883-1.htm">英语四六级</a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong><a href="http://www.jxeea.cn/">江西省教育考试院</a></strong></td>
+  <td align="center"><strong><a href="http://www.jxpta.com/index.html">江西人事考试网</a></strong></td>
+  <td align="center"><strong><a href="http://kzp.mof.gov.cn/index.jsp">全国会计资格</a></strong></td>
+  <td align="center"><strong><a href="http://pjcy.mof.gov.cn/">发票验证</a></strong></td>
+  <td align="center"><strong><a href="https://www.codexy.cn/xycode/#/">院校代码-备</a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong><a href="https://www.jszg.edu.cn/">中国教师资格网</a></strong></td>
+  <td align="center"><strong><a href="http://jyt.jiangxi.gov.cn/">江西教育网</a></strong></td>
+  <td align="center"><strong><a href=""></a></strong></td>
+  <td align="center"><strong><a href=""></a></strong></td>
+  <td align="center"><strong><a href="https://www.zjlib.cn/" title="支付宝扫描登陆">浙江图书馆</a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong><a href=""></a></strong></td>
+  <td align="center"><strong><a href="https://dsa.dayainfo.com/">大雅相似度分析</a></strong></td>
+  <td align="center"><a href="https://www.yuque.com/baizefeilian/bg?" title="密码：sckx"><strong>语雀</strong></a></td>
+  <td align="center"><strong><a href="http://wj2020.ysepan.com/" title="密码：Aa123456">永硕E盘</a></strong></td>
+  <td align="center"><a href="https://www.academic-res.com/">云端学术资源</a></td>
+  </tr>
+  <tr>
+  <td align="center"><strong>工具————</strong></td>
+  <td align="center"><strong><a href="https://www.remove.bg/zh">照片换底</a></strong></td>
+  <td align="center"><strong><a href="https://photokit.com/?lang=zh">照片换底（备）</a></strong></td>
+  <td align="center"><strong><a href="http://www.blpack.com/" title="低成本下载百度文库">文档服务</a></strong></td>
+  <td align="center"><strong><a href="https://tool.browser.qq.com/" title="腾讯qq浏览器在线工具箱,部分收费">帮小忙</a></strong></td>
+  </tr>
+  <tr>
+        <td align="center">
+          <div class="dropdown">
+            <strong><a href="https://hellowindows.cn/">HelloWindows</a></strong>
+            <div class="dropdown-content">
+              <a href="https://winx.run/">备选及更多1</a>
+              <a href="https://alist.govm.cloud">备选及更多2</a>
+            </div>
+          </div>
+        </td>
+  <td align="center"><strong><a href="https://www.wepe.com.cn/">微PE工具箱</a></strong></td>
+  <td align="center"><strong><a href="https://www.waifu2x.net/">无损放大</a></strong></td>
+  <td align="center"><strong><a href="https://cowtransfer.com/">奶牛快传</a></strong></td>
+  <td align="center"><strong><a href="https://www.wenshushu.cn/">文叔叔</a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong><a href="https://stackedit.cn/">Markdown在线编辑</a></strong></td>
+  <td align="center"><strong><a href="https://www.runoob.com/note/56524">Git常用命令大全</a></strong></td>
+  <td align="center"><strong><a href="https://c.runoob.com/front-end/61/">HTML/CSS/JS 在线工具</a></strong></td>
+  <td align="center"><strong><a href="https://py3.codeskulptor.org/">Python在线IDE</a></strong></td>
+  <td align="center"><strong><a href="https://www.67tool.com/" title="非会员有一定限制">即时工具</a></strong></td>
+  </tr>
+  <tr>
+  <td align="center"><strong><a href="https://tools.pdf24.org/zh/all-tools">PDF24 Tools</a></strong></td>
+  <td align="center"><strong><a href="https://www.ijiaodui.com/">爱校对</a></strong></td>
+  <!--自留地有道云备用链接及使用相对路径实现同一目录下打开自留地页面（上级目录则使用"../ziliudi.html"） -->
+  <td align="center">++<a href="https://note.youdao.com/s/R5L6y85K">·自留地</a>++<a href="ziliudi.html">·自留地</a></td>
+  <td align="center">++<a href="http://yun.360xkw.com/yunmanager/manager/login.html">·AIO</a>++</td>
+  <td align="center">++<a href="http://www.360xkw.com/class/course.html">·在线学习</a>++</td>
+  </tr>
+  </tbody>
+  </table>
+  <div id="footer">
+    <p>
+      <img src="https://s1.ax1x.com/2023/03/24/pp0XhQg.png" alt="">
+      <a href="https://beian.mps.gov.cn/#/query/webSearch?code=36011102000828" class="record-info">赣公网安备36011102000828</a>&nbsp;|&nbsp;
+      <a href="https://beian.miit.gov.cn/" class="record-info">赣ICP备2023001426号-1</a>
+    </p>
+  </div>
+  </div>
 </body>
 </html>
